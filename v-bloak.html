@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./lib/vue.js"></script>
+<body>
+    <div class='container'>
+        <!-- v-bloak 解决插值表达式的闪烁问题 -->
+        <div v-bloak>{{msg}}</div>
+        <div v-text="msg">若使用了vue的v-text属性 这里的值将会被msg进行替换</div>
+        <div v-html="html">v-html 和 v-text同理 只不过v-html可以解析html</div>
+        <div v-text="html">v-html 和 v-text同理 只不过v-html可以解析html</div>
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el : ".container",
+        data : {
+            msg : "hello world",
+            html : "<h1>我是h1解析我吧</h1>"
+        }
+    })
+</script>
+</html>

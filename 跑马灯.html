@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./lib/vue.js"></script>
+<body>
+    <div id="container">
+       <input type="button" value="跑起来" @click="start">
+       <input type="button" value="停止" @click="stop">
+       <h1>{{msg}}</h1> 
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el : "#container",
+        data : {
+            msg : "我是一个快乐的跑马灯!",
+            intervalId : null
+        },
+        methods: {
+            start(){
+
+                if (this.intervalId != null) {
+                    return -1;
+                }
+                // console.log(1)
+                var intervalId = setInterval(() => {
+                    var before = this.msg.substring(0,1);
+                    var stop = this.msg.substring(1);
+                    var str = stop + before;
+                    this.msg = str;
+                }, 500);
+                this.intervalId = intervalId;
+            },
+            stop(){
+                clearInterval(this.intervalId);
+                this.intervalId = null;
+            }
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./lib/vue.js"></script>
+<body>
+    <div id="container">
+        <!-- 事件绑定 v-on 简写@  -->
+        <input type="button" value="按钮v-on:" v-on:click="clickHandler"><br>
+        <input type="button" value="按钮@" @click="clickHandler">
+        <br>
+        <!-- v-on 后可以跟着我们平常绑定的事件 如鼠标被移到某元素之上 -->
+        <input type="button" value="按钮" @mouseover="clickHandler">
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el : "#container",
+        data : {
+
+        },
+        methods: {
+            clickHandler(){
+                alert("click")
+            }
+        }
+    })
+</script>
+</html>

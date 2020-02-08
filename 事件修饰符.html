@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./lib/vue.js"></script>
+<style>
+    .father {
+        width: 100%;
+        height: 200px;
+        background-color: blueviolet;
+    }
+
+    .son {
+        height: 100px;
+        width: 100%;
+        background-color: red;
+    }
+</style>
+<body>
+    <div id="container" class="father" @click="father">
+        我是爸爸紫色
+        <!-- 阻止事件冒泡 :stop -->
+       <div class="son" @click:stop='son'>
+           我是儿子红色
+       </div> 
+       
+    </div>
+    <!-- 阻止默认事件 :prevent -->
+    <a href="http://blog.tianqb.cn" @click="aHandler">去博客 可以打印 </a>
+    <a href="http://blog.tianqb.cn" @click:prevent="aHandler">去博客 : 无法打印</a>
+
+    <!-- 只触发一次 :once -->
+    <!-- 还有 :capture :self 用的不多 -->
+</body>
+<script>
+    var app = new Vue({
+        el : "#container",
+        methods: {
+            father() {
+                console.log("i am father")
+            },
+            son() {
+                console.log("i am son")
+            },
+            aHandler() {
+                console.log("a href")
+            }
+        }
+    })
+</script>
+</html>

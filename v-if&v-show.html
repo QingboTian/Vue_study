@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./lib/vue.js"></script>
+<style>
+    .red {
+        background-color: red;
+        height: 100px;
+        width: 100px;
+    }
+    .yellow {
+        background-color: yellow;
+        height: 100px;
+        width: 100px;
+    }
+</style>
+<body>
+    <div id="container">
+        <!-- v-if 每次都会去重新渲染元素 v-show 只渲染一次 若为false 改变为display:none  -->
+        <input type="button" value="切换" @click="switchHandler">
+        <!-- 适用于页面变换少 -->
+        <div class="red" v-if="flag"></div>
+        <div class="yellow" v-show="!flag"></div>
+    </div>
+    <!-- v-if 每次都会去重新渲染元素 v-show 只渲染一次 若为false 改变为display:none  -->
+    <!-- 适用于页面频繁变换 -->
+    <!-- <div id="container">
+        
+        <input type="button" value="v-show切换" @click="switchHandler">
+        <div class="red" v-show="flag"></div>
+        <div class="yellow" v-show="flag"></div>
+    </div> -->
+</body>
+<script>
+    var app = new Vue({
+        el : "#container",
+        data : {
+            flag : true
+        },
+        methods: {
+            switchHandler(){
+                this.flag = !this.flag
+            }
+        }
+    })
+</script>
+</html>

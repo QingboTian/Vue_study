@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./lib/vue.js"></script>
+<body>
+    <div id="container">
+        <!-- v-for 对数据进行遍历渲染 -->
+        <!-- 第一个参数表示遍历数据的子元素 第二个参数表示索引（下标） -->
+        <!-- 确保数据的唯一性 使用key -->
+        <p v-for="(item,index) in list" :key="item.id">
+            ID : {{item.id}} Name : {{item.name}} Index : {{index}}
+        </p>
+
+        <!-- 遍历对象 -->
+        <!-- 参数分别为 值 键 索引 -->
+        <p v-for="(value,key,index) in obj">
+            {{key}}
+            {{value}}
+            {{index}}
+        </p>
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el : "#container",
+        data : {
+            list : [
+                {id : 1, name : "张三"},
+                {id : 2, name : "李四"},
+                {id : 3, name : "王五"},
+            ],
+            obj : {
+                id : 4, name : "张六"
+            }
+        } 
+    })
+</script>
+</html>
