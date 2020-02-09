@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./lib/vue.js"></script>
+<body>
+    <!-- 过滤器分为全局过滤器 和 私有过滤器 -->
+    <div id="container">
+        <!-- 不带参数 -->
+        <p>{{msg | strFilter}}</p>
+        <!-- 携带一个参数 -->
+        <p>{{msg | strFilter('添加的字符串')}}</p>
+        <!-- 携带多个参数 -->
+        <!-- 同携带一个 在过滤器处同arg0 添加参数即可 -->
+        
+    </div>
+
+    <!-- 私有过滤器 若私有过滤器与全局过滤器同名 则采用私有过滤器 -->
+    <div id="container2">
+        <p>{{msg2 | privateFilter}}</p>
+    </div>
+</body>
+<script>
+
+    // 定义全局过滤器
+    Vue.filter('strFilter', function(data, arg0 = ""){
+        if (arg0 == '') 
+            return data + "我是追加的字符串";
+        else 
+            return data + arg0;
+    })
+
+    var app = new Vue({
+        el : "#container",
+        data : {
+            msg : "我是原生的字符串"
+        }
+    })
+
+    var app2 = new Vue({
+        el : "#container2",
+        data : {
+            msg2 : "私有过滤器 只允许当前Vue对象使用 其他Vue对象无法使用"
+        },
+        filters: {
+            privateFilter(data){
+                return data + "我是追加的==="
+            }
+        }
+    })
+</script>
+</html>

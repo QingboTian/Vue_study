@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./lib/vue.js"></script>
+<body>
+
+    <div id="container">
+        <!-- vue 没有v-focus -->
+        <input v-focus placeholder="自定义私有指令v-focus">    
+    </div>
+</body>
+<script>
+
+    var app = new Vue({
+        el : "#container",
+        directives: {
+            inserted(el){
+                el.focus()
+            }
+        }
+    })
+</script>
+</html>

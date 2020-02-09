@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./lib/vue.js"></script>
+<body>
+    <!-- 按键修饰符 如在表单中数据输入完成时点击回车自动提交数据 -->
+    <div id="container">
+        <!-- 点击回车.enter -->
+        <input type="text" v-model="msg" @keyup.enter="Handler">
+        <!-- vue的其他按键修饰符 -->
+        <!-- .tab .delete .esc .space .up .down .left .right -->
+        <!-- 其他键则可使用js的键值keycode 如：f2 -->
+        <input type="text" v-model="msg" @keyup.113="Handler">
+
+        <!-- 自定义按键修饰符 -->
+        <input type="text" v-model="msg" @keyup.f2="Handler">
+    </div>
+</body>
+<script>
+
+    // 自定义按键修饰符
+    Vue.config.keyCodes.f2 = 113
+    // keycode ：
+    // https://www.cnblogs.com/wujilong/archive/2012/09/24/2699847.html
+
+    var app = new Vue({
+        el : "#container",
+        data : {
+            msg : "数据"
+        },
+        methods: {
+            Handler(){
+                alert(this.msg)
+            }
+        }
+    })
+</script>
+</html>

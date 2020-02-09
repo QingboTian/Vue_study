@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./lib/vue.js"></script>
+<body>
+
+    <div id="container">
+        <!-- vue 没有v-focus -->
+        <input v-focus placeholder="自定义全局指令v-focus">    
+    </div>
+</body>
+<script>
+
+    Vue.directive ("focus", {
+        // 钩子函数 
+        // inserted dom插入
+        // bind dom绑定
+        // update dom节点更新
+        inserted (el) {
+            // 这里的el就是一个dom元素 可以直调用foucs方法
+            el.focus();
+        }
+    })
+
+    var app = new Vue({
+        el : "#container",
+        
+    })
+</script>
+</html>
