@@ -10,8 +10,9 @@
 <body>
 
     <div id="container">
-        <!-- vue 没有v-focus -->
-        <input v-focus placeholder="自定义私有指令v-focus">    
+        <h1 v-color="'red'">我是一个H1</h1>    
+        <h1 v-color="'blue'">我是一个H1</h1>    
+        <h1 v-color="'yellow'" v-fontweight="100">我是一个H1</h1>    
     </div>
 </body>
 <script>
@@ -19,9 +20,15 @@
     var app = new Vue({
         el : "#container",
         directives: {
-            inserted(el){
-                el.focus()
-            }
+            'color':{
+                bind(el, binding){
+                    el.style.color=binding.value
+                }
+            },
+            // 自定义指令的简写方式 若使用的钩子函数为update 和 bind 可以简写为
+            'fontweight':function (el, binding) {
+                            el.style.fontWeight = binding.value
+                        }
         }
     })
 </script>

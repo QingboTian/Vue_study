@@ -11,21 +11,40 @@
 
     <div id="container">
         <!-- vue 没有v-focus -->
-        <input v-focus placeholder="自定义全局指令v-focus">    
+        <input v-focus placeholder="自定义全局指令v-focus">
+        <h1 v-color="'red'">我是一个H1</h1>
+        <h1 v-color="'yellow'">我是一个H1</h1>
+        <h1 v-color="'blue'">我是一个H1</h1>    
     </div>
 </body>
 <script>
 
     Vue.directive ("focus", {
         // 钩子函数 
-        // inserted dom插入
-        // bind dom绑定
+        // inserted dom插入  一般用于dom的动作 如获取焦点等
+        // bind dom绑定 一般用于dom的渲染 如颜色等
         // update dom节点更新
         inserted (el) {
             // 这里的el就是一个dom元素 可以直调用foucs方法
             el.focus();
         }
+        
     })
+
+    // 钩子函数参数binding的常用属性 name value expression
+    Vue.directive(
+        "color",{
+            bind(el, binding){
+                el.style.color=binding.value
+                // 指令名称 color
+                console.log(binding.name)
+                // value值 red
+                console.log(binding.value)
+                // 表达式 'red'
+                console.log(binding.expression)
+            }
+        }
+    )
 
     var app = new Vue({
         el : "#container",

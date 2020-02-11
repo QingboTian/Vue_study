@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./lib/vue.js"></script>
+<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+<body>
+    <!-- 常见的请求方式 get post jsonp... -->
+    <div id="container">
+        <input type="button" value="get" @click="get">
+        <input type="button" value="jsonp" @click="jsonp">
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el : "#container",
+        data :{
+
+        },
+        methods: {
+            // get
+            get(){
+                this.$http.get(url).then(res => {
+                    console.log(res)
+                },err => {
+                    console.log(err)
+                })
+            },
+            // post
+            // https://www.runoob.com/vue2/vuejs-ajax.html
+            // emulateJSON 设置请求体的类型为application/x-www-form-urlencoded
+            post(){
+                this.$http.post(url, {}, {emulateJSON : true}).then(res => {
+
+                },err => {
+
+                })
+            },
+            jsonp() {
+                this.$http.jsonp("http://vue.studyit.io/api/jsonp", {}).then(res => {
+                    console.log(res)
+                },err => {
+                    console.log(err)
+                })
+            }
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./lib/vue.js"></script>
+<body>
+    <!-- Vue的生命周期函数 -->
+    <!-- https://cn.vuejs.org/v2/guide/instance.html#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%9B%BE%E7%A4%BA -->
+    <div id="container">
+        <h1 id="h1">{{msg}}</h1>
+        <input type="button" value="改变数据" @click="msg='数据改变了'">
+    </div>  
+    <img src="https://cn.vuejs.org/images/lifecycle.png" style="width: 500px;">
+    
+</body>
+<script>
+    var app = new Vue({
+        el : "#container",
+        data : {
+            msg : "数据"
+        },
+        methods: {
+            show(){
+                console.log("show().....")
+            }
+        },
+        // <!-- 生命周期函数如下 -->
+        beforeCreate () {
+            // 这时只是初始化了一些默认的事件与生命周期钩子
+            // console.log(this.msg) underfine
+            // console.log(this.show()) not function
+        },
+        created () {
+            // 这时初始化了data methods等属性
+            // console.log(this.msg) 
+            // console.log(this.show())
+        },
+        beforeMount () {
+            // 这时页面上的数据还未发生渲染
+            // 数据只是在内存中进行加载
+            // console.log('data中数据:' + this.msg)
+            // console.log('页面中的数据:' + document.getElementById("h1").innerText)
+        },
+        mounted () {
+            // 页面上的数据已经发生了渲染
+            // console.log('data中数据:' + this.msg)
+            // console.log('页面中的数据:' + document.getElementById("h1").innerText)
+        },
+        beforeUpdate () {
+            // 当data发生变化时则进行调用 这时data已经改变 但是页面还未渲染 不限次调用
+            // console.log('data中数据:' + this.msg)
+            // console.log('页面中的数据:' + document.getElementById("h1").innerText)
+        },
+        updated () {
+            // 页面数据已经渲染
+            // console.log('data中数据:' + this.msg)
+            // console.log('页面中的数据:' + document.getElementById("h1").innerText)
+        },
+        beforeDestroy () {
+            // 销毁前 vue对象的属性方法还存在可以使用
+        },
+        destroyed () {
+            //一切都销毁 如页面完全关闭
+        }
+    })
+</script>
+</html>
