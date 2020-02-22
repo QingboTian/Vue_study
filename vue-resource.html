@@ -24,6 +24,7 @@
         methods: {
             // get
             get(){
+                var url = "http://localhost:8080/api/shortvideo/version";
                 this.$http.get(url).then(res => {
                     console.log(res)
                 },err => {
@@ -33,20 +34,20 @@
             // post
             // https://www.runoob.com/vue2/vuejs-ajax.html
             // emulateJSON 设置请求体的类型为application/x-www-form-urlencoded
-            post(){
-                this.$http.post(url, {}, {emulateJSON : true}).then(res => {
+            // post(){
+            //     this.$http.post(url, {}, {emulateJSON : true}).then(res => {
 
-                },err => {
+            //     },err => {
 
-                })
-            },
-            jsonp() {
-                this.$http.jsonp("http://vue.studyit.io/api/jsonp", {}).then(res => {
-                    console.log(res)
-                },err => {
-                    console.log(err)
-                })
-            }
+            //     })
+            // },
+            // jsonp() {
+            //     this.$http.jsonp("http://vue.studyit.io/api/jsonp", {}).then(res => {
+            //         console.log(res)
+            //     },err => {
+            //         console.log(err)
+            //     })
+            // }
         }
     })
 </script>

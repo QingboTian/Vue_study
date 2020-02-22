@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./lib/vue.js"></script>
+<script src="./lib/vue-router.js"></script>
+
+<style>
+    /* 默认路由样式 */
+    .router-link-active,.routeActive {
+        text-decoration: none;
+        font-size: larger;
+        color: red;
+    }
+</style>
+
+<body>
+    <div id="container">
+        
+
+        <!-- 这种写法都要在href中添加# -->
+        <!-- <a href="#/login">登录</a>
+        <a href="#/register">注册</a> -->
+
+        <!-- 自动渲染为a标签 -->
+        <router-link to="/login?type=login">登录</router-link>
+        <router-link to="/register?type=register">注册</router-link>
+
+        <router-view></router-view>
+
+    </div>
+
+
+    <template id="login">
+        <h1>登录模块</h1>
+    </template>
+    <template id="register">
+        <h1>注册模块</h1>
+    </template>
+</body>
+<script>
+
+    var login = {
+        template : "#login",
+        created () {
+            // 获取路由的一些属性值
+            console.log(this.$route)
+            // 获取路由的query 即?type = login 这种类型的值需要通过type获得
+            console.log(this.$route.query.type)
+        }
+    }
+
+    var register = {
+        template : "#register",
+        created () {
+            console.log(this.$route.query.type)
+        }
+    }
+    // 创建路由对象
+    var routerObj = new VueRouter({
+        // 路由配置对象
+        routes : [
+            { path: '/login', component: login },
+            { path: '/register', component: register },
+            // 默认指向login
+            { path: '/', redirect: "/login" },
+        ],
+        linkActiveClass : "routeActive"// 修改默认样式名称 可以指定一些存在的样式 比如一些UI框架的样式
+    })
+
+    
+
+    var app = new Vue({
+        el : "#container",
+        components: {
+            login : login,
+            register : register
+        },
+        router : routerObj,
+        // created () {
+        //     console.log(this.$route)
+        // }
+    })
+</script>
+</html>

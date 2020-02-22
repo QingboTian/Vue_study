@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./lib/vue.js"></script>
+<script src="./lib/vue-router.js"></script>
+
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+
+    h1 {
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .head {
+        background-color: red;
+        height: 100px;
+    }
+
+    .left {
+        background-color: yellow;
+        flex: 2;
+    }
+
+    .main {
+        background-color: blue;
+        flex: 8;
+    }
+
+    .body {
+        flex: 1;
+        display: flex;
+        /* height: 100%; */
+    }
+
+
+</style>
+
+<body>
+    <div id="container" class="container">
+        <router-view></router-view>
+        <div class="body">
+            <router-view name="left"></router-view>
+            <router-view name="main"></router-view>
+        </div>
+    </div>
+
+    <template id="head">
+        <h1 class="head">我是头区域</h1>
+    </template>
+
+    <template id="left">
+        <h1 class="left">我是左侧区域</h1>
+    </template>
+
+    <template id="main">
+        <h1 class="main">我是主内容区域</h1>
+    </template>
+</body>
+<script>
+
+    var head = {
+        template: "#head"
+    }
+
+    var left = {
+        template: "#left"
+    }
+
+    var main = {
+        template: "#main"
+    }
+
+    var router = new VueRouter({
+        routes: [
+            {
+                path: "/", components: {
+                    default : head, // 默认显示
+                    left : left,// 属性名称用于router-view的name属性
+                    main : main
+                }
+            }
+        ]
+    })
+
+    var app = new Vue({
+        el: "#container",
+        components: {
+            myhead: head,
+            left: left,
+            mymain: main
+        },
+        router: router
+    })
+</script>
+
+</html>

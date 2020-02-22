@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./lib/vue.js"></script>
+<script src="./lib/vue-router.js"></script>
+
+<body>
+    <div id="container">
+        
+
+        <!-- 这种写法都要在href中添加# -->
+        <!-- <a href="#/login">登录</a>
+        <a href="#/register">注册</a> -->
+
+        <!-- 自动渲染为a标签 -->
+        
+
+        <router-link to="/show">SHOW</router-link>
+        <router-view></router-view>
+
+    </div>
+
+    <template id="show">
+        <div>
+            <h1>SHOW</h1>
+            <router-link to="login">登录</router-link>
+            <router-link to="/show/register">注册</router-link>
+            <router-view></router-view>
+        </div>
+    </template>
+
+    <template id="login">
+        <h1>登录模块</h1>
+    </template>
+    <template id="register">
+        <h1>注册模块</h1>
+    </template>
+</body>
+<script>
+
+    var login = {
+        template : "#login"
+    }
+
+    var register = {
+        template : "#register"
+    }
+
+    var show = {
+        template : "#show"
+    }
+    // 创建路由对象
+    var routerObj = new VueRouter({
+        // 路由配置对象
+        routes : [
+            { 
+                path: '/show', 
+                component: show,
+                children : [
+                    // 若子组件没有加 / 则链接中必须包含父组件的路由地址
+                    // 若子组件加上 / 链接中不需要携带父组件的路由地址
+                    // 推荐使用 不加 / 的方式
+                    {path : '/login', component : login },
+                    {path : 'register', component : register }
+                ]
+            },
+        ],
+    })
+
+    
+
+    var app = new Vue({
+        el : "#container",
+        components: {
+            login : login,
+            register : register
+        },
+        router : routerObj,
+    })
+</script>
+</html>

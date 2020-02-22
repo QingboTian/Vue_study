@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./lib/vue.js"></script>
+<body>
+    <div id="container" ref="containerRef">
+       我是一个文本
+       <my-h1 ref="h1Ref">组件</my-h1> 
+    </div>
+
+    <template id="myh1">
+        <h1>我是一个组件</h1>
+    </template>
+</body>
+<script>
+
+    Vue.component('my-h1',{
+        template : "#myh1"
+    })
+
+    var app = new Vue({
+        el : "#container",
+        // 页面渲染完自动执行
+        mounted () {
+            // 获取页面上所有带有re属性的DOM元素
+            console.log(this.$refs)
+
+            // 获取指定的DOM元素
+            console.log(this.$refs.containerRef.innerText)
+
+            // 同样适用于组件 可用于获取组件的data methods等
+            console.log("H1组件：" , this.$refs.h1Ref)
+        }
+    })
+</script>
+</html>

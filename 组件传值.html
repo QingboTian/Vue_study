@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./lib/vue.js"></script>
+<body>
+    <div id="container">
+        <son-button  @fun="fatherHandler" :msg='msg'></son-button>
+    </div>
+
+    <template id='son'>
+        <div>
+            <input type="button" value="子组件Button" @click="sonClick">
+            <h4>{{msg}}</h4>
+        </div>
+    </template>
+</body>
+<script>
+
+    Vue.component(
+        'son-button',
+        {
+            template : "#son",
+            data () {
+                return {
+
+                }
+            },
+            // 调用父组件中的data必须使用props数组进行声明
+            props: ["msg"],
+            methods: {
+                sonClick(){
+                    // 子组件调用父组件的方法
+                    // 第二个参数以及之后负责向调用的父组件函数传递数据
+                    this.$emit('fun'," and son")
+                }
+            }
+        }
+    )
+
+    var app = new Vue({
+        el : "#container",
+        data : {
+            msg : "我是父组件中的msg"
+        },
+        methods: {
+            fatherHandler(data){
+                // 父组件调用子组件的数据
+                console.log("father" + data)
+            }          
+        }
+    })
+</script>
+</html>

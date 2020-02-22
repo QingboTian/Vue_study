@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./lib/vue.js"></script>
+<body>
+    <div id="container">
+        <my-h1></my-h1>
+        <!-- 这里注意 若标签得定义采用的是驼峰命名法 使用的时候需要转换为如上格式 -->
+        <myh2></myh2>
+        <my-h3></my-h3>
+        <myh4></myh4>
+        <myh5></myh5>
+    </div>
+
+    <template id="h4">
+        <h4>我是一个H4</h4>
+    </template>
+</body>
+<script>
+
+    // 第一种
+    var h1 = Vue.extend({
+        template : "<h1> 我是一个H1 </h1>"
+    })
+    Vue.component('myH1', h1);
+    var h2 = Vue.extend({
+        template : "<h2> 我是一个H2 </h2>"
+    })
+    Vue.component('myh2', h2);
+
+    // 第二种方式
+    // 注意：字符串中的html只能存在一个根节点 若需要多个标签 则可以采用<div> 等方式进行包裹
+    Vue.component('my-h3', {
+        template : "<div> <h3>{{msg}}</h3><h3>{{msg}}</h3> </div>",
+        data () { // data必须是个函数 而不是一个对象
+            return {
+                msg : "我是两个H3"
+            }
+        }
+    })
+
+    // 第三种
+    Vue.component('myh4', {
+        template : "#h4"
+    })
+
+    var app = new Vue({
+        el : "#container",
+        // 自定义私有组件
+        components: {
+            myh5 : {
+                template : "<h5>我是一个H5</h5>"
+            }
+        }
+    })
+</script>
+</html>
